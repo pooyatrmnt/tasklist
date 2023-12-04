@@ -10,10 +10,10 @@ Route::get("/", function () { //Index of Project - List Tasks
     return redirect()->route("tasks.index");
 });
 
-Route::get('/tasks', function () {    //Show Task
+Route::get('/tasks', function () {    //Show List Of Task
 
     return view('index', [
-        "tasks" => Task::latest()->get()
+        "tasks" => Task::latest()->paginate(10)
     ]);
 })->name("tasks.index");
 
@@ -48,7 +48,7 @@ Route::post("/tasks", function (TaskRequest $request) {  //Insert Task Into Data
 
 })->name("tasks.store");
 
-Route::put("/tasks/{task}", function (Task $task, TaskRequest $request) {  //Insert Task Into Database
+Route::put("/tasks/{task}", function (Task $task, TaskRequest $request) {  //Insert Updated Task Into Database
 
     // $data = $request->validated();
 
@@ -71,6 +71,13 @@ Route::delete("/tasks/{task}", function (Task $task){
     return redirect()->route("tasks.index")
         ->with("success", "Task deleted successfully!");
 })->name("tasks.destroy");
+
+Route::put("tasks/{task}/toggle-complete", function (Task $task){
+
+    $task->toggleComplete();
+
+    return redirect()->back()->with("success", "Task updated successfully!");
+})->name("tasks.toggle-complete");
 
 Route::fallback(function () {  //404 Page
     return (Response::HTTP_NOT_FOUND);
