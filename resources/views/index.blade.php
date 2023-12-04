@@ -7,7 +7,7 @@
 
     @if(count($tasks) > 0)
         @foreach($tasks as $task)
-            <a href="{{route("tasks.show", [ "id" => $task -> id])}}">{{$task -> title}}</a><br>
+            <a href="{{route("tasks.show", [ "task" => $task -> id])}}">{{$task -> title}}</a><br>
         @endforeach
     @else
         <div>There are no tasks!</div>
