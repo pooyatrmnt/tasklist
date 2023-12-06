@@ -15,11 +15,11 @@
     <style type="text/tailwindcss">
 
         .btn {
-            @apply rounded-md px-2 py-1 text-center font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50
+            @apply bg-green-200 rounded-md px-2 py-1 mt-3 text-center font-medium shadow-sm ring-1 ring-green-700/10 hover:bg-slate-50
         }
 
         .link {
-            @apply font-medium text-gray-700 text-center rounded-md px-3 py-1 shadow-sm ring-1 ring-pink-500 bg-pink-50 hover:bg-pink-500
+            @apply font-medium text-center rounded-md mt-3 px-3 py-1 shadow-sm ring-1 ring-pink-500 bg-pink-50 hover:bg-pink-500
         }
 
         label {
@@ -43,36 +43,37 @@
 </head>
 
 <body class="bg-slate-50">
-<div class="container mx-auto mb-10 pb-10 max-w-lg">
-    <div class="px-4 py-4 bg-slate-100/90">
-        @if (session()->has('success'))
-        <div x-data="{ flash: true}">
-            <div x-show="flash">
-                <div class="relative mb-10 rounded border border-green-400 bg-green-100 px-4 py-3 text-lg text-green-700"
-            role="alert">
-            <strong class="font-bold">Success!</strong>
+    <div class="container mx-auto mb-10 pb-10 max-w-lg">
+        <div class="px-4 py-4 bg-slate-200/90">
+            @if (session()->has('success'))
+                <div x-data="{ flash: true }">
+                    <div x-show="flash">
+                        <div class="relative mb-10 rounded border border-green-400 bg-green-100 px-4 py-3 text-lg text-green-700"
+                            role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <div>
+                                {{ session('success') }}
+                            </div>
+
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" @click="flash = false" stroke="currentColor"
+                                    class="h-6 w-6 cursor-pointer">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <h1 class="text-3xl mb-4">@yield('title')</h1>
             <div>
-                {{ session('success') }}
-            </div>
-
-            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    @click="flash = false" stroke="currentColor" class="h-6 w-6 cursor-pointer">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </span>
-
-        </div>
+                @yield('content')
             </div>
         </div>
-    @endif
-
-    <h1 class="text-3xl mb-4">@yield('title')</h1>
-    <div>
-        @yield('content')
     </div>
-    </div>
-</div>
 </body>
 
 </html>
