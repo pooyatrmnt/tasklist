@@ -19,7 +19,7 @@
         }
 
         .link {
-            @apply font-medium text-gray-700 underline decoration-pink-500
+            @apply font-medium text-gray-700 text-center rounded-md px-3 py-1 shadow-sm ring-1 ring-pink-500 bg-pink-50 hover:bg-pink-500
         }
 
         label {
@@ -42,8 +42,10 @@
     @yield('styles')
 </head>
 
-<body class="container mx-auto mt-10 mb-10 max-w-lg">
-    @if (session()->has('success'))
+<body class="bg-slate-50">
+<div class="container mx-auto mb-10 pb-10 max-w-lg">
+    <div class="px-4 py-4 bg-slate-100/90">
+        @if (session()->has('success'))
         <div x-data="{ flash: true}">
             <div x-show="flash">
                 <div class="relative mb-10 rounded border border-green-400 bg-green-100 px-4 py-3 text-lg text-green-700"
@@ -69,6 +71,8 @@
     <div>
         @yield('content')
     </div>
+    </div>
+</div>
 </body>
 
 </html>
