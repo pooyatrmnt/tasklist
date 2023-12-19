@@ -15,7 +15,7 @@
     <style type="text/tailwindcss">
 
         .btn {
-            @apply bg-green-200 rounded-md px-2 py-1 mt-3 text-center font-medium shadow-sm ring-1 ring-green-700/10 hover:bg-slate-50
+            @apply bg-green-200 rounded-md px-2 py-1 mt-3 text-center font-medium shadow-sm ring-1 ring-green-700/10 hover:bg-green-100
         }
 
         .link {

@@ -37,7 +37,7 @@
             @enderror
         </div>
 
-        <div style="flex items-center gap-2">
+        <div class="flex w-full justify-between items-center gap-2">
             <button class="btn" type="submit">
                 @isset($task)
                     Update Task

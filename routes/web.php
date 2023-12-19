@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 use App\Models\Task;
 
-Route::get("/", function () { //Index of Project - List Tasks
+Route::get("/", function () { //Index of Project - List of Tasks
 
     return redirect()->route("tasks.index");
 });
@@ -32,15 +32,6 @@ Route::get("task/{task}", function (Task $task) {  //Show Task Details
 
 Route::post("/tasks", function (TaskRequest $request) {  //Insert Task Into Database
 
-    // $data = $request->validated();
-
-    // $task = new Task;
-    // $task->title = $data["title"];
-    // $task->description = $data["description"];
-    // $task->long_description = $data["long_description"];
-
-    // $task->save();
-
     $task = Task::create($request -> validated());
 
     return redirect()->route("tasks.show", ["task" => $task->id])
@@ -50,14 +41,6 @@ Route::post("/tasks", function (TaskRequest $request) {  //Insert Task Into Data
 
 Route::put("/tasks/{task}", function (Task $task, TaskRequest $request) {  //Insert Updated Task Into Database
 
-    // $data = $request->validated();
-
-    // $task->title = $data["title"];
-    // $task->description = $data["description"];
-    // $task->long_description = $data["long_description"];
-
-    // $task->save();
-
     $task -> update($request -> validated());
 
     return redirect()->route("tasks.show", ["task" => $task->id])
@@ -65,14 +48,14 @@ Route::put("/tasks/{task}", function (Task $task, TaskRequest $request) {  //Ins
 
 })->name("tasks.update");
 
-Route::delete("/tasks/{task}", function (Task $task){
+Route::delete("/tasks/{task}", function (Task $task){    //Delete Task
     $task -> delete();
 
     return redirect()->route("tasks.index")
         ->with("success", "Task deleted successfully!");
 })->name("tasks.destroy");
 
-Route::put("tasks/{task}/toggle-complete", function (Task $task){
+Route::put("tasks/{task}/toggle-complete", function (Task $task){   //Complete Task
 
     $task->toggleComplete();
 
